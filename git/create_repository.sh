@@ -23,3 +23,4 @@ git remote rm github
 
 #### Useful Commands ####
 git remote -v
+git config --list
