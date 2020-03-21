@@ -1,8 +1,9 @@
 
 #### pandas ####
 
-# read_csv()
+## Reading/Saving CSV file
 df = pd.read_csv("/path/to/file.csv")
+injury_report.to_csv("{}injury_report.csv".format(data_path), index=False, mode='a')
 
 df["A"].mean()
 df["A"].median()
