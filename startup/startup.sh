@@ -40,6 +40,8 @@ python -m ipykernel install --name query --display-name "Python 3.7.0 (query)" -
 # h2o env
 conda create -y --name h2o python=3.6.5 pip
 source activate h2o
+pip install pandas
+pip install matplotlib
 pip install requests
 pip install tabulate
 pip install "colorama>=0.3.8"
@@ -51,17 +53,6 @@ pip install -f http://h2o-release.s3.amazonaws.com/h2o/latest_stable_Py.html h2o
 
 pip install ipykernel
 python -m ipykernel install --name h2o --display-name "Python 3.6.5 (h2o)" --user
-
-# Mount Disk to GCE instance
-sudo lsblk
-sudo mkfs.ext4 -m 0 -E lazy_itable_init=0,lazy_journal_init=0,discard /dev/sdb
-sudo mkdir -p /mnt/disks/staging
-sudo mount -o discard,defaults /dev/sdb /mnt/disks/staging
-sudo chmod a+w /mnt/disks/staging
-sudo cp /etc/fstab /etc/fstab.backup
-sudo blkid /dev/sdb
-echo UUID=`sudo blkid -s UUID -o value /dev/sdb` /mnt/disks/staging ext4 discard,defaults,nofail 0 2 | sudo tee -a /etc/fstab
-cat /etc/fstab
 
 #### Run Time ####
 end_time=$(date)
