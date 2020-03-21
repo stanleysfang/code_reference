@@ -29,6 +29,7 @@ export PATH="$HOME/anaconda3/bin:$PATH"
 # query env
 conda create -y --name query python=3.7.0 pip
 source activate query
+
 pip install google-api-python-client
 pip install google-cloud-bigquery
 pip install pandas
@@ -40,6 +41,7 @@ python -m ipykernel install --name query --display-name "Python 3.7.0 (query)" -
 # h2o env
 conda create -y --name h2o python=3.6.5 pip
 source activate h2o
+
 pip install pandas
 pip install matplotlib
 
