@@ -1,6 +1,8 @@
+pandas
+matplotlib
+
 google-api-python-client
 google-cloud-bigquery
-pandas
 pyarrow
 
 ipykernel

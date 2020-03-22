@@ -3,9 +3,11 @@
 conda create -y --name query python=3.7.0 pip
 source activate query
 
+pip install pandas
+pip install matplotlib
+
 pip install google-api-python-client
 pip install google-cloud-bigquery
-pip install pandas
 pip install pyarrow
 
 pip install ipykernel
