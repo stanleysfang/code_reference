@@ -86,5 +86,6 @@ train["Fare_Rank"] = np.arange(train.shape[0], dtype="int64")+1
 
 #### concat ####
 # parameter axis: concat along rows if 0 and columns if 1; default is 0
+# parameter sort: sort along the non-concat axis; default is True is old pandas version
 full = pd.concat([train.loc[:, train.columns != "Survived"], test], sort=False)
-pd.concat([pd.DataFrame(np.arange(full.shape[0], dtype="int64")+1, columns=["row_number"]), full.reset_index(drop=True)], axis=1, sort=False) # make sure indices are all reset when concat along columns
+pd.concat([pd.DataFrame(np.arange(full.shape[0], dtype="int64")+1, columns=["row_number"]), full.reset_index(drop=True)], axis=1, sort=False) # make sure indices are reset when concat along columns
