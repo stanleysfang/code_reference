@@ -1,14 +1,16 @@
 
-#### conda reference ####
+#########################
+#    conda reference    #
+#########################
 
-# create env
+#### create env ####
 conda create -y --name query python=3.7.0 pip
 
-# remove env
+#### remove env ####
 conda remove -y --name query --all
 
-# list env
+#### list env ####
 conda env list
 
-# activate env
+#### activate env ####
 source activate query
