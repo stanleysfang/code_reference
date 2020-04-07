@@ -7,13 +7,17 @@ class QueryRunner:
     Runs queries on BigQuery.
     
     Attributes:
-        run_project: the project that queries will be billed to
         client: BigQuery client
+        run_project: the project that the job will run on behalf of
         job_history: a list of handlers to query jobs ran
     """
-    def __init__(self, run_project="stanleysfang"):
-        self.run_project = run_project
-        self.client = bigquery.Client(project=self.run_project)
+    def __init__(self, client=None, run_project="stanleysfang"):
+        if client:
+            self.client = client
+        else:
+            self.client = bigquery.Client(project=run_project)
+        
+        self.run_project = self.client.project
         self.job_history=[]
     
     def config_job(self, destination_table=None, overwrite=True, time_partitioning=False, partition_field=None, dry_run=False):
@@ -28,6 +32,7 @@ class QueryRunner:
         else:
             job_config.write_disposition = 'WRITE_APPEND'
         
+        # The only supported partition type is "DAY" which is the default.
         if destination_table and time_partitioning:
             job_config.time_partitioning = bigquery.table.TimePartitioning(field=partition_field)
         

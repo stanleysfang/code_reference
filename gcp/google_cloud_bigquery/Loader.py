@@ -7,13 +7,17 @@ class Loader:
     Loads tables to BigQuery.
     
     Attributes:
-        run_project: the project that queries will be billed to
         client: BigQuery client
-        job_history: a list of handlers to query jobs ran
+        run_project: the project that the job will run on behalf of
+        job_history: a list of handlers to load jobs ran
     """
-    def __init__(self, run_project="stanleysfang"):
-        self.run_project = run_project
-        self.client = bigquery.Client(project=self.run_project)
+    def __init__(self, client=None, run_project="stanleysfang"):
+        if client:
+            self.client = client
+        else:
+            self.client = bigquery.Client(project=run_project)
+        
+        self.run_project = self.client.project
         self.job_history=[]
     
     def config_job(self, schema, overwrite=True, time_partitioning=False, partition_field=None):
