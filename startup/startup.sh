@@ -12,17 +12,30 @@ cd $HOME
 ## Install Java 8
 sudo apt update && sudo apt install -y openjdk-8-jre
 
-## Install R
-sudo add-apt-repository -y ppa:marutter/rrutter
-sudo apt-get update && sudo apt-get install -y r-base r-base-dev
+## Install the latest R 4.0
+# Add the following to /etc/apt/sources.list
+# deb https://cloud.r-project.org/bin/linux/ubuntu xenial-cran40/
+# deb http://mirrors.ocf.berkeley.edu/ubuntu/ bionic-backports main restricted universe
+
+# sudo apt-key list # Check if you already have Michael Rutter's key
+# sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+# sudo add-apt-repository -y ppa:marutter/rrutter # This is an old way of getting R. Do not run this anymore
+
+# sudo apt-get update && sudo apt-get install -y r-base r-base-dev
+
 # Uncomment R_LIBS path in /etc/R/Renviron.site
-mkdir -p $HOME/R/library
+# mkdir -p $HOME/R/library
+
+# Updates packages in /usr/lib/R/site-library
+# sudo apt-get update && sudo apt-get upgrade
 
 ## Install Anaconda
-wget "https://repo.anaconda.com/archive/Anaconda3-5.3.1-Linux-x86_64.sh"
-bash $HOME/Anaconda3-5.3.1-Linux-x86_64.sh -b
+Anaconda_filename="Anaconda3-2020.07-Linux-x86_64.sh"
+wget "https://repo.anaconda.com/archive/${Anaconda_filename}"
+md5sum $HOME/${Anaconda_filename}
+bash $HOME/${Anaconda_filename} -b
 echo -e "\n# added by Anaconda3 installer\nexport PATH=\"$HOME/anaconda3/bin:\$PATH\"" >> $HOME/.bashrc # this doesn't work with airflow
-rm $HOME/Anaconda3-5.3.1-Linux-x86_64.sh
+rm $HOME/${Anaconda_filename}
 export PATH="$HOME/anaconda3/bin:$PATH"
 
 ## Create Conda Environments
@@ -35,7 +48,7 @@ pip install matplotlib
 
 pip install google-api-python-client
 pip install google-cloud-bigquery
-pip install pyarrow
+pip install pyarrow==0.17.0
 
 pip install ipykernel
 python -m ipykernel install --name query --display-name "Python 3.7.0 (query)" --user
@@ -49,10 +62,10 @@ pip install matplotlib
 
 pip install requests
 pip install tabulate
-pip install "colorama>=0.3.8"
+pip install colorama>=0.3.8
 pip install future
 pip uninstall -y h2o
-pip install -f http://h2o-release.s3.amazonaws.com/h2o/latest_stable_Py.html h2o
+pip install -f http://h2o-release.s3.amazonaws.com/h2o/latest_stable_Py.html h2o --trusted-host h2o-release.s3.amazonaws.com
 # pip install http://h2o-release.s3.amazonaws.com/h2o/rel-wolpert/11/Python/h2o-3.18.0.11-py2.py3-none-any.whl --trusted-host h2o-release.s3.amazonaws.com
 
 pip install ipykernel
