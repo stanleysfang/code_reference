@@ -3,6 +3,6 @@ matplotlib
 
 google-api-python-client
 google-cloud-bigquery
-pyarrow
+pyarrow==0.17.0
 
 ipykernel

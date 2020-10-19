@@ -48,7 +48,7 @@ pip install matplotlib
 
 pip install google-api-python-client
 pip install google-cloud-bigquery
-pip install pyarrow==0.17.0
+pip install "pyarrow==0.17.0"
 
 pip install ipykernel
 python -m ipykernel install --name query --display-name "Python 3.7.0 (query)" --user
@@ -62,7 +62,7 @@ pip install matplotlib
 
 pip install requests
 pip install tabulate
-pip install colorama>=0.3.8
+pip install "colorama>=0.3.8"
 pip install future
 pip uninstall -y h2o
 pip install -f http://h2o-release.s3.amazonaws.com/h2o/latest_stable_Py.html h2o --trusted-host h2o-release.s3.amazonaws.com
